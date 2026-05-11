@@ -1,0 +1,74 @@
+
+body {
+  background: linear-gradient(135deg, #e3f0ff 0%, #f9e6ff 100%);
+  color: #22223b;
+}
+
+.navbar {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.navbar-brand, .navbar-nav .nav-link {
+  color: #fff !important;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+.navbar-brand img {
+  height: 40px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.card-header {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #5f27cd;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+a, .nav-link {
+  color: #341f97 !important;
+  transition: color 0.2s;
+}
+a:hover, .nav-link:hover {
+  color: #00b894 !important;
+}
+
+.table {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.table thead {
+  background: #a29bfe;
+  color: #fff;
+}
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #f1f8ff;
+}
+
+.btn, .btn-primary, .btn-success, .btn-info, .btn-warning, .btn-secondary {
+  border-radius: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.alert-info {
+  background: #e3f0ff;
+  color: #22223b;
+  border: none;
+}
+
+.octofit-logo {
+  height: 40px;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+.App {
+  text-align: center;
+}
