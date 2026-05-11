@@ -1,10 +1,9 @@
 
-import { useEffect, useState } from 'react';
-
 const Workouts = () => {
   const [workouts, setWorkouts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const endpoint = `${process.env.REACT_APP_CODESPACE_URL}/api/workouts/`;
+  const codespace = process.env.REACT_APP_CODESPACE_NAME;
+  const endpoint = `https://${codespace}-8000.app.github.dev/api/workouts/`;
 
   useEffect(() => {
     console.log('Fetching Workouts from:', endpoint);
@@ -20,16 +19,13 @@ const Workouts = () => {
   }, [endpoint]);
 
   if (loading) return <div className="text-center my-4">Loading workouts...</div>;
-
   if (!workouts.length) return <div className="alert alert-info">No workouts found.</div>;
-
   const columns = Array.from(
     workouts.reduce((cols, item) => {
       Object.keys(item).forEach(k => cols.add(k));
       return cols;
     }, new Set())
   );
-
   return (
     <div className="card mb-4">
       <div className="card-header bg-secondary text-white">

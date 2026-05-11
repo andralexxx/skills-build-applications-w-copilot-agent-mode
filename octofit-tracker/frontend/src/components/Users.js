@@ -1,10 +1,9 @@
 
-import { useEffect, useState } from 'react';
-
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const endpoint = `${process.env.REACT_APP_CODESPACE_URL}/api/users/`;
+  const codespace = process.env.REACT_APP_CODESPACE_NAME;
+  const endpoint = `https://${codespace}-8000.app.github.dev/api/users/`;
 
   useEffect(() => {
     console.log('Fetching Users from:', endpoint);
@@ -20,16 +19,13 @@ const Users = () => {
   }, [endpoint]);
 
   if (loading) return <div className="text-center my-4">Loading users...</div>;
-
   if (!users.length) return <div className="alert alert-info">No users found.</div>;
-
   const columns = Array.from(
     users.reduce((cols, item) => {
       Object.keys(item).forEach(k => cols.add(k));
       return cols;
     }, new Set())
   );
-
   return (
     <div className="card mb-4">
       <div className="card-header bg-warning text-dark">

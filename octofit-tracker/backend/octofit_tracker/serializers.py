@@ -8,9 +8,13 @@ class TeamSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     team = TeamSerializer(read_only=True)
+    team_id = serializers.PrimaryKeyRelatedField(
+        source='team', queryset=Team.objects.all(), write_only=True, required=False, allow_null=True
+    )
+
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'team']
+        fields = ['id', 'username', 'email', 'team', 'team_id']
 
 class WorkoutSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,12 +24,23 @@ class WorkoutSerializer(serializers.ModelSerializer):
 class ActivitySerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     workout = WorkoutSerializer(read_only=True)
+    user_id = serializers.PrimaryKeyRelatedField(
+        source='user', queryset=User.objects.all(), write_only=True
+    )
+    workout_id = serializers.PrimaryKeyRelatedField(
+        source='workout', queryset=Workout.objects.all(), write_only=True
+    )
+
     class Meta:
         model = Activity
-        fields = '__all__'
+        fields = ['id', 'user', 'user_id', 'workout', 'workout_id', 'duration']
 
 class LeaderboardSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
+    user_id = serializers.PrimaryKeyRelatedField(
+        source='user', queryset=User.objects.all(), write_only=True
+    )
+
     class Meta:
         model = Leaderboard
-        fields = '__all__'
+        fields = ['id', 'user', 'user_id', 'points']

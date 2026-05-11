@@ -1,10 +1,10 @@
 
-import { useEffect, useState } from 'react';
-
 const Activities = () => {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
-  const endpoint = `${process.env.REACT_APP_CODESPACE_URL}/api/activities/`;
+  // Use the codespace env variable for the backend URL
+  const codespace = process.env.REACT_APP_CODESPACE_NAME;
+  const endpoint = `https://${codespace}-8000.app.github.dev/api/activities/`;
 
   useEffect(() => {
     console.log('Fetching Activities from:', endpoint);
@@ -20,9 +20,7 @@ const Activities = () => {
   }, [endpoint]);
 
   if (loading) return <div className="text-center my-4">Loading activities...</div>;
-
   if (!activities.length) return <div className="alert alert-info">No activities found.</div>;
-
   // Get all unique keys for table header
   const columns = Array.from(
     activities.reduce((cols, item) => {
@@ -30,7 +28,6 @@ const Activities = () => {
       return cols;
     }, new Set())
   );
-
   return (
     <div className="card mb-4">
       <div className="card-header bg-primary text-white">

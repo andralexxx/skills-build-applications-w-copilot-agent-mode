@@ -1,10 +1,9 @@
 
-import { useEffect, useState } from 'react';
-
 const Leaderboard = () => {
   const [leaders, setLeaders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const endpoint = `${process.env.REACT_APP_CODESPACE_URL}/api/leaderboard/`;
+  const codespace = process.env.REACT_APP_CODESPACE_NAME;
+  const endpoint = `https://${codespace}-8000.app.github.dev/api/leaderboard/`;
 
   useEffect(() => {
     console.log('Fetching Leaderboard from:', endpoint);
@@ -20,16 +19,13 @@ const Leaderboard = () => {
   }, [endpoint]);
 
   if (loading) return <div className="text-center my-4">Loading leaderboard...</div>;
-
   if (!leaders.length) return <div className="alert alert-info">No leaderboard data found.</div>;
-
   const columns = Array.from(
     leaders.reduce((cols, item) => {
       Object.keys(item).forEach(k => cols.add(k));
       return cols;
     }, new Set())
   );
-
   return (
     <div className="card mb-4">
       <div className="card-header bg-success text-white">

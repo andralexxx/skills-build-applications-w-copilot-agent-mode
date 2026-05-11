@@ -1,10 +1,9 @@
 
-import { useEffect, useState } from 'react';
-
 const Teams = () => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
-  const endpoint = `${process.env.REACT_APP_CODESPACE_URL}/api/teams/`;
+  const codespace = process.env.REACT_APP_CODESPACE_NAME;
+  const endpoint = `https://${codespace}-8000.app.github.dev/api/teams/`;
 
   useEffect(() => {
     console.log('Fetching Teams from:', endpoint);
@@ -20,16 +19,13 @@ const Teams = () => {
   }, [endpoint]);
 
   if (loading) return <div className="text-center my-4">Loading teams...</div>;
-
   if (!teams.length) return <div className="alert alert-info">No teams found.</div>;
-
   const columns = Array.from(
     teams.reduce((cols, item) => {
       Object.keys(item).forEach(k => cols.add(k));
       return cols;
     }, new Set())
   );
-
   return (
     <div className="card mb-4">
       <div className="card-header bg-info text-white">
